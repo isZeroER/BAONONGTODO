@@ -1,6 +1,7 @@
 const repoOwner = 'isZeroER'; // 替换为你的 GitHub 用户名
 const repoName = 'BAONONGTODO'; // 替换为你的仓库名称
-const personalAccessToken = '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'; // 替换为你的个人访问令牌
+const personalAccessToken = process.env.GITHUB_TOKEN; // 使用环境变量
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const dateListElement = document.getElementById('dateList');
