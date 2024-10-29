@@ -1,3 +1,7 @@
+const repoOwner = 'isZeroER'; // 替换为你的 GitHub 用户名
+const repoName = 'BAONONGTODO'; // 替换为你的仓库名称
+const personalAccessToken = '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'; // 替换为你的个人访问令牌
+
 document.addEventListener('DOMContentLoaded', () => {
     const dateListElement = document.getElementById('dateList');
     const todoModal = document.getElementById('todoModal');
@@ -15,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.classList.contains('date-item')) {
             const selectedDate = event.target.dataset.date;
             modalDate.innerText = selectedDate;
-            todoInput.value = getTodoItems(selectedDate).join('\n');
+            fetchTodoItems(selectedDate);
             todoModal.style.display = 'block';
         }
     });
@@ -29,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     saveButton.addEventListener('click', () => {
         const selectedDate = modalDate.innerText;
         const items = todoInput.value.split('\n').filter(item => item.trim() !== '');
-        localStorage.setItem(selectedDate, JSON.stringify(items));
+        saveTodoItems(selectedDate, items);
         loadDateList();
         todoModal.style.display = 'none';
     });
@@ -37,26 +41,62 @@ document.addEventListener('DOMContentLoaded', () => {
     // 添加今天的 TODO List
     document.getElementById('addDateButton').addEventListener('click', () => {
         const today = new Date().toLocaleDateString();
-        if (!localStorage.getItem(today)) {
-            localStorage.setItem(today, JSON.stringify([]));
-            loadDateList();
-        }
+        loadDateList();
     });
 
     // 加载日期列表
     function loadDateList() {
-        dateListElement.innerHTML = '';
-        for (const key in localStorage) {
-            const dateItem = document.createElement('div');
-            dateItem.classList.add('date-item');
-            dateItem.dataset.date = key;
-            dateItem.innerText = key;
-            dateListElement.appendChild(dateItem);
-        }
+        const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/todos`;
+        fetch(url, {
+            headers: {
+                'Authorization': `token ${personalAccessToken}`
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            dateListElement.innerHTML = '';
+            data.forEach(file => {
+                const dateItem = document.createElement('div');
+                dateItem.classList.add('date-item');
+                dateItem.dataset.date = file.name.replace('.json', '');
+                dateItem.innerText = dateItem.dataset.date;
+                dateListElement.appendChild(dateItem);
+            });
+        });
     }
 
     // 获取 TODO 项目
-    function getTodoItems(date) {
-        return JSON.parse(localStorage.getItem(date)) || [];
+    function fetchTodoItems(date) {
+        const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/todos/${date}.json`;
+        fetch(url, {
+            headers: {
+                'Authorization': `token ${personalAccessToken}`
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const decodedContent = atob(data.content);
+            todoInput.value = decodedContent.split('\n').filter(item => item).join('\n');
+        });
+    }
+
+    // 保存 TODO 项目
+    function saveTodoItems(date, items) {
+        const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/todos/${date}.json`;
+        const content = items.join('\n');
+        const encodedContent = btoa(content);
+        const data = {
+            message: `Update ${date} TODOs`,
+            content: encodedContent
+        };
+
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${personalAccessToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
     }
 });
