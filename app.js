@@ -1,4 +1,4 @@
-const filePath = 'mytasks.json'; // JSON 文件路径
+const filePath = 'tasks.json'; // JSON 文件路径
 
 // 从本地加载任务
 async function loadTasks() {
@@ -26,7 +26,7 @@ function renderTasks(tasks) {
         dateElement.textContent = task.date; // 显示日期
 
         const textElement = document.createElement('div');
-        textElement.textContent = task.text; // 显示任务
+        textElement.innerHTML = task.text.replace(/\n/g, '<br>'); // 将换行符替换为 <br>
 
         taskItem.appendChild(dateElement);
         taskItem.appendChild(textElement);
