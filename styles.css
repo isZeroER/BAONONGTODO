@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #007BFF, #FFD700);
+    margin: 0;
+    padding: 20px;
+    color: #fff;
+}
+
+h1 {
+    text-align: center;
+}
+
+#taskList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.task-item {
+    border: 2px solid #fff;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    width: 200px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s;
+}
+
+.task-item:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.date {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}

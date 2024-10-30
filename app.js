@@ -20,7 +20,16 @@ function renderTasks(tasks) {
     tasks.forEach(task => {
         const taskItem = document.createElement('div');
         taskItem.className = 'task-item';
-        taskItem.textContent = `${task.date}:\n${task.text}`; // 显示日期和任务
+
+        const dateElement = document.createElement('div');
+        dateElement.className = 'date';
+        dateElement.textContent = task.date; // 显示日期
+
+        const textElement = document.createElement('div');
+        textElement.textContent = task.text; // 显示任务
+
+        taskItem.appendChild(dateElement);
+        taskItem.appendChild(textElement);
         taskList.appendChild(taskItem);
     });
 }
