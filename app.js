@@ -1,76 +1,30 @@
-let tasks = [];
+const repoOwner = 'isZeroER'; // 替换为你的GitHub用户名
+const repoName = 'BAONONGTODO'; // 替换为你的仓库名
+const filePath = 'tasks.json'; // JSON 文件路径
 
-// 从 localStorage 加载任务
-function loadTasks() {
-  const storedTasks = localStorage.getItem('tasks');
-  if (storedTasks) {
-    tasks = JSON.parse(storedTasks);
-  }
-  renderTasks();
-}
+// 从 GitHub 加载任务
+async function loadTasks() {
+    const response = await fetch(`https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${filePath}`);
 
-// 保存任务到 localStorage
-function saveTasks() {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-
-// 添加任务
-function addTask() {
-  const taskInput = document.getElementById('taskInput');
-  const taskText = taskInput.value.trim();
-
-  if (taskText === '') return;
-
-  const newTask = {
-    id: Date.now(),
-    text: taskText,
-    completed: false,
-    date: new Date().toLocaleDateString() // 获取当前日期
-  };
-
-  tasks.push(newTask);
-  taskInput.value = '';
-  saveTasks(); // 保存任务到 localStorage
-  renderTasks();
-}
-
-// 删除任务
-function deleteTask(id) {
-  tasks = tasks.filter(task => task.id !== id);
-  saveTasks(); // 保存更新后的任务
-  renderTasks();
-}
-
-// 切换任务完成状态
-function toggleTask(id) {
-  tasks = tasks.map(task => 
-    task.id === id ? { ...task, completed: !task.completed } : task
-  );
-  saveTasks(); // 保存更新后的任务
-  renderTasks();
+    if (response.ok) {
+        const tasks = await response.json();
+        renderTasks(tasks);
+    } else {
+        console.error('无法加载任务:', response.statusText);
+    }
 }
 
 // 渲染任务列表
-function renderTasks() {
-  const taskList = document.getElementById('taskList');
-  taskList.innerHTML = '';
+function renderTasks(tasks) {
+    const taskList = document.getElementById('taskList');
+    taskList.innerHTML = '';
 
-  tasks.forEach(task => {
-    const listItem = document.createElement('li');
-    listItem.className = `task-item ${task.completed ? 'completed' : ''}`;
-
-    const taskSpan = document.createElement('span');
-    taskSpan.textContent = `${task.text} (${task.date})`; // 显示任务和日期
-    taskSpan.onclick = () => toggleTask(task.id);
-
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = '删除';
-    deleteButton.onclick = () => deleteTask(task.id);
-
-    listItem.appendChild(taskSpan);
-    listItem.appendChild(deleteButton);
-    taskList.appendChild(listItem);
-  });
+    tasks.forEach(task => {
+        const listItem = document.createElement('li');
+        listItem.className = 'task-item';
+        listItem.textContent = `${task.text} (${task.date})`; // 显示任务和日期
+        taskList.appendChild(listItem);
+    });
 }
 
 // 页面加载时获取任务
