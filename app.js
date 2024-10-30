@@ -18,10 +18,10 @@ function renderTasks(tasks) {
     taskList.innerHTML = '';
 
     tasks.forEach(task => {
-        const listItem = document.createElement('li');
-        listItem.className = 'task-item';
-        listItem.textContent = `${task.text} (${task.date})`; // 显示任务和日期
-        taskList.appendChild(listItem);
+        const taskItem = document.createElement('div');
+        taskItem.className = 'task-item';
+        taskItem.textContent = `${task.date}:\n${task.text}`; // 显示日期和任务
+        taskList.appendChild(taskItem);
     });
 }
 

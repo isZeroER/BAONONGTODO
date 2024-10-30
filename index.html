@@ -5,13 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODOLISTS</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .task-item { margin: 5px 0; }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+        }
+        .task-item {
+            border: 2px solid #007BFF;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px;
+            width: 150px;
+            text-align: center;
+            background-color: #f8f9fa;
+            transition: transform 0.2s;
+        }
+        .task-item:hover {
+            transform: scale(1.05);
+            background-color: #e2e6ea;
+        }
     </style>
 </head>
 <body>
     <h1>TODOLISTS</h1>
-    <ul id="taskList"></ul>
+    <div id="taskList"></div>
 
     <script src="app.js"></script>
 </body>
