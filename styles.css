@@ -19,13 +19,14 @@ h1 {
 .task-item {
     border: 2px solid #fff;
     border-radius: 10px;
-    padding: 20px; /* 增加内边距 */
-    margin: 15px; /* 增加外边距 */
-    width: 250px; /* 增加宽度 */
-    height: 150px; /* 增加高度 */
+    padding: 20px;
+    margin: 15px;
+    width: 250px;
+    height: auto; /* 允许高度自适应 */
     text-align: center;
     background-color: rgba(255, 255, 255, 0.1);
     transition: transform 0.2s;
+    overflow-wrap: break-word; /* 允许文本换行 */
 }
 
 .task-item:hover {
@@ -35,6 +36,6 @@ h1 {
 
 .date {
     font-weight: bold;
-    font-size: 1.5em; /* 增加字体大小 */
+    font-size: 1.5em;
     margin-bottom: 10px;
 }
