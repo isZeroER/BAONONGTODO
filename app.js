@@ -1,10 +1,8 @@
-const repoOwner = 'isZeroER'; // 替换为你的GitHub用户名
-const repoName = 'BAONONGTODO'; // 替换为你的仓库名
 const filePath = 'tasks.json'; // JSON 文件路径
 
-// 从 GitHub 加载任务
+// 从本地加载任务
 async function loadTasks() {
-    const response = await fetch(`https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${filePath}`);
+    const response = await fetch(filePath);
 
     if (response.ok) {
         const tasks = await response.json();
