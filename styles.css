@@ -1,21 +1,32 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
+    margin: 0;
     background-color: #f4f4f9;
   }
   
-  #root {
+  #app {
     width: 90%;
     max-width: 600px;
+    text-align: center;
   }
   
-  .task-list {
-    list-style: none;
+  #taskInput {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    margin: 10px 0;
+  }
+  
+  #taskList {
+    list-style-type: none;
     padding: 0;
   }
   
@@ -28,5 +39,10 @@ body {
     background-color: #ffffff;
     border: 1px solid #ddd;
     border-radius: 5px;
+  }
+  
+  .task-item.completed span {
+    text-decoration: line-through;
+    color: #999;
   }
   
