@@ -16,36 +16,6 @@ h1 {
     justify-content: center;
 }
 
-.task-item {
-    border: 2px solid #fff;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 15px;
-    width: 250px;
-    height: auto; /* 允许高度自适应 */
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.1);
-    transition: transform 0.2s;
-    overflow-wrap: break-word; /* 允许文本换行 */
-}
-
-.task-item:hover {
-    transform: scale(1.05);
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.date {
-    font-weight: bold;
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-#taskList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
 .task-item, .month-item {
     border: 2px solid #fff;
     border-radius: 10px;
@@ -71,4 +41,22 @@ h1 {
     font-weight: bold;
     font-size: 1.5em;
     margin-bottom: 10px;
+}
+
+.back-button {
+    background-color: #FFD700; /* 背景色 */
+    color: #007BFF; /* 文字颜色 */
+    border: none; /* 去掉边框 */
+    border-radius: 5px; /* 圆角边框 */
+    padding: 10px 20px; /* 内边距 */
+    font-size: 1em; /* 字体大小 */
+    cursor: pointer; /* 鼠标指针效果 */
+    margin-top: 20px; /* 上边距 */
+    transition: background-color 0.3s, transform 0.2s; /* 过渡效果 */
+}
+
+.back-button:hover {
+    background-color: #007BFF; /* 悬停时的背景色 */
+    color: #FFD700; /* 悬停时的文字颜色 */
+    transform: scale(1.05); /* 悬停时放大效果 */
 }

@@ -50,6 +50,7 @@ function renderTasks(data, month) {
 
     // 添加“返回”按钮以返回月份视图
     const backButton = document.createElement('button');
+    backButton.className = 'back-button'; // 添加类名
     backButton.textContent = '返回月份';
     backButton.onclick = () => renderMonths(data);
     taskList.appendChild(backButton);
