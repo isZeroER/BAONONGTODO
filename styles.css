@@ -39,3 +39,36 @@ h1 {
     font-size: 1.5em;
     margin-bottom: 10px;
 }
+
+#taskList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.task-item, .month-item {
+    border: 2px solid #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px;
+    width: 250px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s;
+    overflow-wrap: break-word;
+}
+
+.task-item:hover, .month-item:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.month-item {
+    cursor: pointer;
+}
+
+.date {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
