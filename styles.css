@@ -1,22 +1,33 @@
+/* 样式重置 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #007BFF, #FFD700);
     margin: 0;
     padding: 20px;
     color: #fff;
+    position: relative;
 }
 
 h1 {
     text-align: center;
+    z-index: 1;
+    position: relative;
 }
 
 #taskList {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    z-index: 1;
+    position: relative;
 }
 
-.task-item, .month-item {
+.task-item {
     border: 2px solid #fff;
     border-radius: 10px;
     padding: 20px;
@@ -25,16 +36,11 @@ h1 {
     text-align: center;
     background-color: rgba(255, 255, 255, 0.1);
     transition: transform 0.2s;
-    overflow-wrap: break-word;
 }
 
-.task-item:hover, .month-item:hover {
+.task-item:hover {
     transform: scale(1.05);
     background-color: rgba(255, 255, 255, 0.2);
-}
-
-.month-item {
-    cursor: pointer;
 }
 
 .date {
@@ -43,20 +49,61 @@ h1 {
     margin-bottom: 10px;
 }
 
-.back-button {
-    background-color: #FFD700; /* 背景色 */
-    color: #007BFF; /* 文字颜色 */
-    border: none; /* 去掉边框 */
-    border-radius: 5px; /* 圆角边框 */
-    padding: 10px 20px; /* 内边距 */
-    font-size: 1em; /* 字体大小 */
-    cursor: pointer; /* 鼠标指针效果 */
-    margin-top: 20px; /* 上边距 */
-    transition: background-color 0.3s, transform 0.2s; /* 过渡效果 */
+.month-item {
+    border: 2px solid #007BFF;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    text-align: center;
+    cursor: pointer;
+    background-color: rgba(0, 123, 255, 0.5);
+    transition: background-color 0.3s;
 }
 
-.back-button:hover {
-    background-color: #007BFF; /* 悬停时的背景色 */
-    color: #FFD700; /* 悬停时的文字颜色 */
-    transform: scale(1.05); /* 悬停时放大效果 */
+.month-item:hover {
+    background-color: rgba(0, 123, 255, 0.8);
+}
+
+.back-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #FFD700;
+    color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#photoBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.background-photo {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    animation: slide-up 20s linear infinite;
+}
+
+@keyframes slide-up {
+    from {
+        top: 100%;
+    }
+    to {
+        top: -100%;
+    }
 }
