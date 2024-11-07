@@ -10,7 +10,7 @@ body {
     margin: 0;
     padding: 20px;
     color: #fff;
-    background: linear-gradient(to right, #0000FF, #FF69B4); /* 蓝色到粉色渐变 */
+    background: linear-gradient(to right, #3535ff, #f797c7); /* 蓝色到粉色渐变 */
     position: relative;
 }
 
